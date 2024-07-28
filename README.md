@@ -1,16 +1,6 @@
 # table_generator_app
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="/https://github.com/mabdula2004/Table-Generator-App/blob/main/output/Screenshot_20240728_082827.jpg" alt="My cool logo"/
+<img src="/https://github.com/mabdula2004/Table-Generator-App/blob/main/output/Screenshot_20240728_082839.jpg" alt="My cool logo"/
+<img src="/https://github.com/mabdula2004/Table-Generator-App/blob/main/output/Screenshot_20240728_082850.jpg" alt="My cool logo"/
+<img src="/https://github.com/mabdula2004/Table-Generator-App/blob/main/output/Screenshot_20240728_082900.jpg" alt="My cool logo"/
