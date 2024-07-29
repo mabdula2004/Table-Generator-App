@@ -94,43 +94,46 @@ class _QuizState extends State<Quiz> {
                     questions[currentQuestionIndex]['question'],
                     style: TextStyle(fontSize: 24),
                   ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: questions[currentQuestionIndex]['options'].map<Widget>((option) {
+                      return GestureDetector(
+                        onTap: () {
+                          checkAnswer(option);
+                        },
+                        child: Container(
+                          color: Color(0xFFEB1555),
+                          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                          padding: EdgeInsets.all(15),
+                          child: Center(
+                            child: Text(
+                              option,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  if (showResult)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        isCorrect
+                            ? 'Correct!'
+                            : 'You selected the wrong option. The correct answer is $correctAnswer.',
+                        style: TextStyle(fontSize: 18, color: isCorrect ? Colors.green : Colors.red),
+                      ),
+                    ),
                 ],
               ),
             ),
           ),
-          ...questions[currentQuestionIndex]['options'].map<Widget>((option) {
-            return GestureDetector(
-              onTap: () {
-                checkAnswer(option);
-              },
-              child: Container(
-                color: Color(0xFFEB1555),
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                padding: EdgeInsets.all(15),
-                child: Center(
-                  child: Text(
-                    option,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-          if (showResult)
-            Container(
-              child: Center(
-                child: Text(
-                  isCorrect
-                      ? 'Correct!'
-                      : 'You selected the wrong option. The correct answer is $correctAnswer.',
-                  style: TextStyle(fontSize: 18, color: isCorrect ? Colors.green : Colors.red),
-                ),
-              ),
-            ),
           Container(
             margin: EdgeInsets.only(top: 10),
             height: 100,

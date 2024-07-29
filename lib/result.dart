@@ -21,7 +21,7 @@ class Result extends StatefulWidget {
 
 class _ResultState extends State<Result> {
   int currentPage = 0;
-  final int itemsPerPage = 3 * 3; // 3 rows with 3 columns each
+  final int itemsPerPage = 3 * 6; // 3 rows with 6 columns each
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,8 @@ class _ResultState extends State<Result> {
     // Calculate the text size based on the endLimit
     double textSize = 20.0;
     if (widget.endLimit > 10) {
-      textSize = 20.0 - (widget.endLimit - 10) * 0.3;  // Reduce text size further
-      if (textSize < 8.0) {  // Allow smaller text size
+      textSize = 20.0 - (widget.endLimit - 10) * 0.3; // Reduce text size further
+      if (textSize < 8.0) { // Allow smaller text size
         textSize = 8.0;
       }
     }
@@ -70,12 +70,12 @@ class _ResultState extends State<Result> {
             ),
           ),
           Expanded(
-             flex: 5,
+            flex: 5,
             child: RepeatContainer(
               color: activeColor,
               cardWidget: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // 3 columns
+                  crossAxisCount: 3, // 6 columns
                   childAspectRatio: 2.0, // Adjust aspect ratio if needed
                   mainAxisSpacing: 20.0, // Space between rows
                   crossAxisSpacing: 20.0, // Space between columns
@@ -105,7 +105,7 @@ class _ResultState extends State<Result> {
               color: Color(0xFFEB1555),
               margin: EdgeInsets.only(top: 10),
               width: double.infinity,
-              height: 100,
+              height: 97.0,
             ),
           ),
           if (totalPages > 1)
@@ -119,7 +119,11 @@ class _ResultState extends State<Result> {
                         currentPage--;
                       });
                     },
-                    child: Text('Previous'),
+                    child: Text('Previous',
+                      style:TextStyle(
+                        fontSize: 25,
+                      ) ,
+                    ),
                   ),
                 if (currentPage < totalPages - 1)
                   ElevatedButton(
@@ -128,7 +132,11 @@ class _ResultState extends State<Result> {
                         currentPage++;
                       });
                     },
-                    child: Text('Next'),
+                    child: Text('Next',
+                    style:TextStyle(
+                      fontSize: 25,
+                    ) ,
+                    ),
                   ),
               ],
             ),
