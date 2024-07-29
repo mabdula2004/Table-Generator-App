@@ -70,12 +70,12 @@ class _ResultState extends State<Result> {
             ),
           ),
           Expanded(
-            flex: 5,
+             flex: 5,
             child: RepeatContainer(
               color: activeColor,
               cardWidget: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,  // 3 columns
+                  crossAxisCount: 3, // 3 columns
                   childAspectRatio: 2.0, // Adjust aspect ratio if needed
                   mainAxisSpacing: 20.0, // Space between rows
                   crossAxisSpacing: 20.0, // Space between columns
@@ -85,7 +85,7 @@ class _ResultState extends State<Result> {
                   return Center(
                     child: Text(
                       table[startIndex + index],
-                      style: TextStyle(fontSize: textSize),
+                      style: TextStyle(fontSize: 14),
                     ),
                   );
                 },
