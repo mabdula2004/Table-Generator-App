@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'InputPage.dart';
+import 'dart:math';
 
 class Quiz extends StatefulWidget {
   final int number;
@@ -31,13 +32,17 @@ class _QuizState extends State<Quiz> {
   }
 
   void generateQuestions() {
-    for (int i = widget.startLimit; i <= widget.endLimit; i++) {
-      String questionText = '${widget.number} * $i = ?';
-      String correctAnswer = (widget.number * i).toString();
+    List<int> questionIndexes = List.generate(widget.endLimit - widget.startLimit + 1, (index) => widget.startLimit + index);
+    questionIndexes.shuffle();
+
+    for (int i = 0; i < min(5, questionIndexes.length); i++) {
+      int questionIndex = questionIndexes[i];
+      String questionText = '${widget.number} * $questionIndex = ?';
+      String correctAnswer = (widget.number * questionIndex).toString();
       List<String> options = [
         correctAnswer,
-        (widget.number * (i + 1)).toString(),
-        (widget.number * (i + 2)).toString()
+        (widget.number * (questionIndex + 1)).toString(),
+        (widget.number * (questionIndex + 2)).toString()
       ]..shuffle();
 
       questions.add({
@@ -45,8 +50,6 @@ class _QuizState extends State<Quiz> {
         'correctAnswer': correctAnswer,
         'options': options,
       });
-
-      if (questions.length >= 5) break; // Ensure at least five questions
     }
   }
 

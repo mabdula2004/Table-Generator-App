@@ -4,7 +4,7 @@ import 'container.dart';
 import 'calculateData.dart';
 import 'Quiz.dart';
 
-class Result extends StatelessWidget {
+class Result extends StatefulWidget {
   final int number;
   final int startLimit;
   final int endLimit;
@@ -16,22 +16,40 @@ class Result extends StatelessWidget {
   });
 
   @override
+  _ResultState createState() => _ResultState();
+}
+
+class _ResultState extends State<Result> {
+  int currentPage = 0;
+  final int itemsPerPage = 3 * 3; // 3 rows with 3 columns each
+
+  @override
   Widget build(BuildContext context) {
-    // Create an instance of CalculateBrain
-    final CalculateBrain calcBrain = CalculateBrain(number: number, startLimit: startLimit, endLimit: endLimit);
+    final CalculateBrain calcBrain = CalculateBrain(
+      number: widget.number,
+      startLimit: widget.startLimit,
+      endLimit: widget.endLimit,
+    );
     final List<String> table = calcBrain.generateTable();
 
-    // Determine the text size based on the endLimit
+    // Calculate the total number of pages
+    int totalPages = (table.length / itemsPerPage).ceil();
+
+    // Calculate the text size based on the endLimit
     double textSize = 20.0;
-    if (endLimit > 10) {
-      textSize = 20.0 - (endLimit - 10) * 0.5;
-      if (textSize < 10.0) {
-        textSize = 10.0;
+    if (widget.endLimit > 10) {
+      textSize = 20.0 - (widget.endLimit - 10) * 0.3;  // Reduce text size further
+      if (textSize < 8.0) {  // Allow smaller text size
+        textSize = 8.0;
       }
     }
 
-    // Determine the number of columns based on the endLimit
-    int columns = (endLimit / 10).ceil();
+    // Calculate the start and end index for the current page
+    int startIndex = currentPage * itemsPerPage;
+    int endIndex = startIndex + itemsPerPage;
+    if (endIndex > table.length) {
+      endIndex = table.length;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +63,7 @@ class Result extends StatelessWidget {
             child: Container(
               child: Center(
                 child: Text(
-                  'Table of $number',
+                  'Table of ${widget.number}',
                   style: titleStyle,
                 ),
               ),
@@ -53,18 +71,20 @@ class Result extends StatelessWidget {
           ),
           Expanded(
             flex: 5,
-            child: RepaeatContainer(
+            child: RepeatContainer(
               color: activeColor,
               cardWidget: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: columns,
-                  childAspectRatio: 3.0,
+                  crossAxisCount: 3,  // 3 columns
+                  childAspectRatio: 2.0, // Adjust aspect ratio if needed
+                  mainAxisSpacing: 20.0, // Space between rows
+                  crossAxisSpacing: 20.0, // Space between columns
                 ),
-                itemCount: table.length,
+                itemCount: endIndex - startIndex,
                 itemBuilder: (context, index) {
                   return Center(
                     child: Text(
-                      table[index],
+                      table[startIndex + index],
                       style: TextStyle(fontSize: textSize),
                     ),
                   );
@@ -75,9 +95,9 @@ class Result extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Quiz(
-                number: number,
-                startLimit: startLimit,
-                endLimit: endLimit,
+                number: widget.number,
+                startLimit: widget.startLimit,
+                endLimit: widget.endLimit,
               )));
             },
             child: Container(
@@ -88,6 +108,30 @@ class Result extends StatelessWidget {
               height: 100,
             ),
           ),
+          if (totalPages > 1)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if (currentPage > 0)
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        currentPage--;
+                      });
+                    },
+                    child: Text('Previous'),
+                  ),
+                if (currentPage < totalPages - 1)
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        currentPage++;
+                      });
+                    },
+                    child: Text('Next'),
+                  ),
+              ],
+            ),
         ],
       ),
     );

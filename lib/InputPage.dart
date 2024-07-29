@@ -26,7 +26,7 @@ class _InputState extends State<Input> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: RepaeatContainer(
+            child: RepeatContainer(
               color: Color(0xFF1D1E33),
               cardWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +61,7 @@ class _InputState extends State<Input> {
             ),
           ),
           Expanded(
-            child: RepaeatContainer(
+            child: RepeatContainer(
               color: Color(0xFF1D1E33),
               cardWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +96,7 @@ class _InputState extends State<Input> {
             ),
           ),
           Expanded(
-            child: RepaeatContainer(
+            child: RepeatContainer(
               color: Color(0xFF1D1E33),
               cardWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

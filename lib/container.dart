@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RepaeatContainer extends StatelessWidget {
-  RepaeatContainer({required this.color, this.cardWidget, this.onPressed});
+class RepeatContainer extends StatelessWidget {
+  RepeatContainer({required this.color, this.cardWidget, this.onPressed});
 
   final Color color;
   final Widget? cardWidget;
